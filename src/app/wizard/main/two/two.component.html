@@ -1,0 +1,58 @@
+<div class="m-5">
+  <p-card>
+      <!-- <ng-template pTemplate="title">
+          Personal Information
+      </ng-template>
+      <ng-template pTemplate="subtitle">
+          Enter your personal information
+      </ng-template>-->
+      <ng-template pTemplate="content">
+        <form (ngSubmit)="nextPage()" #form="ngForm">
+          <div class="grid">
+            <div class="p-field col-12 md:col-6 lg:col-3">
+                <label for="amount">Amount</label>
+                <input #amount="ngModel" id="amount" type="text" required appOnlyNumber pInputText [(ngModel)]="model.amount"
+                name="amount"
+                [ngClass]="{'ng-dirty': (amount.touched && amount.dirty && amount.invalid)}"/>
+                <ng-container *ngIf="amount.touched && amount.dirty && amount.invalid">
+                  <small *ngIf="form.hasError('required','amount')" class="p-error">Amount is required.</small>
+                  <small *ngIf="form.hasError('appOnlyNumber','amount')" class="p-error">Amount should be number.</small>
+                </ng-container>
+            </div>
+
+            <div class="p-field col-12 md:col-6 lg:col-3">
+                <label for="date">Date</label>
+                <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" #date="ngModel" [showIcon]="true" inputId="icon"
+                [(ngModel)]="model.date" id="date"
+                name="date"
+                [ngClass]="{'ng-dirty': (date.touched && date.dirty && date.invalid)}"></p-calendar>
+                <ng-container *ngIf="date.touched && date.dirty && date.invalid">
+                  <small *ngIf="form.hasError('required','date')" class="p-error">date is required.</small>
+                  <small *ngIf="form.hasError('appOnlyNumber','date')" class="p-error">date should be number.</small>
+                </ng-container>
+            </div>
+
+            <div class="p-field col-12 md:col-6 lg:col-3">
+              <label for="status">status</label>
+              <p-dropdown [options]="status" id="status" [(ngModel)]="model.status" optionLabel="name" ></p-dropdown>
+          </div>
+          <div class="p-field col-12 md:col-6 lg:col-3">
+            <label for="letter">letter</label>
+            <input #letter="ngModel" id="letter" type="text" required appOnlyLetter pInputText [(ngModel)]="model.letter"
+            name="letter"
+            [ngClass]="{'ng-dirty': (letter.touched && letter.dirty && letter.invalid)}"/>
+            <ng-container *ngIf="letter.touched && letter.dirty && letter.invalid">
+              <small *ngIf="form.hasError('required','letter')" class="p-error">letter is required.</small>
+              <small *ngIf="form.hasError('appOnlyLetter','letter')" class="p-error">This field should be letter.</small>
+            </ng-container>
+        </div>
+          </div>
+        </form>
+      </ng-template>
+      <ng-template pTemplate="footer">
+          <div class="grid grid-nogutter justify-content-end">
+              <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+          </div>
+      </ng-template>
+  </p-card>
+</div>
